@@ -6,6 +6,14 @@ class SunDataController < ApplicationController
 
     return render(json: { error: "MISSING_PARAMETERS" }, status: :bad_request) if location.blank? || start_date.blank? # We need the location and at least one date
 
+    # Validates if the sent dates are valid
+    begin
+      Date.parse(start_date)
+      Date.parse(end_date)
+    rescue ArgumentError
+      return render(json: { error: "INVALID_DATE" }, status: :bad_request)
+    end
+
     records = SunriseSunset.where(location: location, date: start_date..end_date).order(:date).to_a
 
     # An array of the dates that are not present in the database
