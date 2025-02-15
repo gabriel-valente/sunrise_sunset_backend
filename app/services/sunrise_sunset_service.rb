@@ -10,9 +10,9 @@ class SunriseSunsetService
 
     return { "status" => "ERROR", "message" => "INVALID_LOCATION" } if latitude.nil? || longitude.nil?
 
-    url = URI("#{SUNSET_SUNRISE_URL}?lat=#{latitude}&lng=#{longitude}&date_start=#{start_date}&date_end=#{end_date}")
+    url = URI("#{SUNSET_SUNRISE_URL}?lat=#{latitude}&lng=#{longitude}&date_start=#{start_date}&date_end=#{end_date}")    
     response = Net::HTTP.get(url)
-
+    
     JSON.parse(response)
   end
 
