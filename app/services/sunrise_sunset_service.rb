@@ -8,7 +8,7 @@ class SunriseSunsetService
   def self.fetch_data(location, start_date, end_date)
     latitude, longitude = get_coordinates(location)
 
-    return { "status" => "ERROR", "message" => "INVALID_LOCATION" } if latitude.nil? || longitude.nil?
+    return { "status" => "ERROR", "body" => "INVALID_LOCATION" } if latitude.nil? || longitude.nil?
 
     url = URI("#{SUNSET_SUNRISE_URL}?lat=#{latitude}&lng=#{longitude}&date_start=#{start_date}&date_end=#{end_date}")    
     response = Net::HTTP.get(url)

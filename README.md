@@ -1,24 +1,18 @@
-# README
+# Sunrise/Sunset Rails app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+How to run the application:
 
-Things you may want to cover:
+Requirements:
 
-* Ruby version
+- Ruby 3.3.7
+- Rails 8.0.1
 
-* System dependencies
+Run the application:
 
-* Configuration
+- > rails s
 
-* Database creation
+Troubleshooting:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Problems related with CORS:
+  Depending how how the React app is initiated, the port of that application may be different from :5173
+  If the React app cannot call the backend, change the file: config/initializers/cors.rb:3:35 to match the port of the runnig React app.

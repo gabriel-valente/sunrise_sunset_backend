@@ -8,8 +8,10 @@ class SunDataController < ApplicationController
 
     # Validates if the sent dates are valid
     begin
-      Date.parse(start_date)
-      Date.parse(end_date)
+      srt_date = Date.parse(start_date)
+      en_date = Date.parse(end_date)
+
+      start_date, end_date = end_date, start_date if srt_date > en_date
     rescue ArgumentError
       return render(json: { error: "INVALID_DATE" }, status: :bad_request)
     end
@@ -43,7 +45,7 @@ class SunDataController < ApplicationController
 
         render(json: records.sort_by(&:date).as_json(except: [:id, :created_at, :updated_at]))
       else
-        render(json: { error: data["message"] }, status: :unprocessable_entity)
+        render(json: { error: data["body"] }, status: :unprocessable_entity)
       end
     end
   end
